@@ -29,14 +29,22 @@ var getTorrent = function(movieTitle) {
 	});
 }
 
+var getStream = function(magnet) {
+	var engine = torrentStream('magnet:' + magnet);
+	engine.on('ready', function() {
+		engine.files.forEach(function(file) {
+			console.log('filename:', file.name);
+			var stream = file.createReadStream();
+		});
+	});
+}
+
 let token = process.argv[2];
 getJSON(token).then(function(data) {
 	console.log('So you want to see %s? ' + 'Loading stream...', String(data.Title).yellow);
-	return data;
-}).then(function(data) {
-	getTorrent(data.Title);
+	return getTorrent(data.Title);
 }).then(function(results) {
-	console.log(results);
+	getStream(results[0].magnetLink);
 }).catch(function(e) {
 	console.log(e);
 });
