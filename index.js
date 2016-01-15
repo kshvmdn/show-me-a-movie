@@ -9,6 +9,7 @@ const torrentStream = require('torrent-stream');
 
 var getJSON = function(token) {
 	return new Promise(function(resolve, reject) {
+		if (token == undefined) reject(new Error('token not supplied'))
 		movie(token, function(err, data) {
 			if (data == null) reject(new Error('invalid request'));
 			if (data.Response == 'False') reject(new Error('invalid token'));
