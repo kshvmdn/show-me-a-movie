@@ -1,2 +1,2 @@
 # show-me-a-movie
-Stream a random English movie through your command line.
+Stream a movie with the command line, given the IMDb ID.

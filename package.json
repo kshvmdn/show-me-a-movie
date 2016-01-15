@@ -1,7 +1,7 @@
 {
   "name": "show-me-a-movie",
   "version": "0.0.0",
-  "description": "Stream random English movies with the command line.",
+  "description": "Stream a movie with the command line, given the IMDb ID.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -29,9 +29,7 @@
   "dependencies": {
     "bluebird": "^3.1.1",
     "colors": "^1.1.2",
-    "inquirer": "^0.11.2",
     "jsonfile": "^2.2.3",
-    "node-movie": "^2.0.0",
     "thepiratebay": "^0.2.5",
     "torrent-stream": "^1.0.2"
   }
