@@ -19,11 +19,24 @@ var getJSON = function(token) {
 	});
 }
 
+var getTorrent = function(movieTitle) {
+	return new Promise(function(resolve, reject) {
+		tpb.search(movieTitle, { 
+			category: '201' 
+		})
+		.then(function(results) { resolve(results); })
+		.catch(function(err) { reject(err); });
+	});
+}
+
 let token = process.argv[2];
 getJSON(token).then(function(data) {
 	console.log('So you want to see %s? ' + 'Loading stream...', String(data.Title).yellow);
 	return data;
 }).then(function(data) {
+	getTorrent(data.Title);
+}).then(function(results) {
+	console.log(results);
 }).catch(function(e) {
 	console.log(e);
 });
