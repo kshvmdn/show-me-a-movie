@@ -6,21 +6,19 @@ Stream any movie through your command line with its IMDb token. Available on [np
 
 #### Requirements:
 
-+ `Node v4.0.0` (for ES6)
-+ [`Peerflix`](http://npmjs.org/packages/peerflix) (globally installed) [`npm install peerflix -g`]
++ Node `v4.0.0` (for ES6)
++ [Peerflix](http://npmjs.org/packages/peerflix) globally installed, `npm install peerflix -g`
 + [VLC](http://www.videolan.org/vlc/index.html)
 
 #### Setup/Running
 
-Install with [npm](npmjs.org/packages/show-me-a-movie).
+Install via [npm](npmjs.org/packages/show-me-a-movie).
 
 ``` 
 npm install show-me-a-movie -g
 ```
 
-Find movie token within IMDb URL.
-
-​	i.e. http://www.imdb.com/title/tt1872181 => `tt1872181`
+Find movie token within IMDb URL, i.e. http://www.imdb.com/title/tt1872181 => `tt1872181`
 
 Run pkg. with token as argument (required).
 
