@@ -2,6 +2,8 @@
 
 Stream any movie through your command line with its IMDb token. Available on [npm](http://npmjs.org/packages/show-me-a-movie).
 
+![example](https://media.giphy.com/media/xTcnThzcE8yzXvgXOE/giphy.gif)
+
 ### Usage
 
 #### Requirements:
