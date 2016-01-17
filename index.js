@@ -30,13 +30,6 @@ var getTorrent = function(movieTitle) {
 	});
 }
 
-var getStream = function(magnet) {
-	var engine = torrentStream('magnet:' + magnet);
-	engine.on('ready', function() {
-		engine.files.forEach(function(file) {
-			console.log('filename:', file.name);
-			var stream = file.createReadStream();
-		});
 var playMagnet = function(args) {
 	let cmd = spawn('peerflix', args).on('error', function(err) {
 		if (err.code == 'ENOENT') throw new Error('Peerflix not installed globably');
@@ -51,7 +44,6 @@ getJSON(imdbToken).then(function(data) {
 	console.log('So you want to see %s? ' + 'Loading stream...', String(data.Title).yellow);
 	return getTorrent(data.Title);
 }).then(function(results) {
-	getStream(results[0].magnetLink);
 	// TODO add handling for multiple files in single magnet
 	var args = [results[0].magnetLink, '--vlc', '--fullscreen'];
 	playMagnet(args);
