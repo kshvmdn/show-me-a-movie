@@ -1,6 +1,6 @@
 {
   "name": "show-me-a-movie",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Stream a movie with the command line, given the IMDb ID.",
   "main": "index.js",
   "scripts": {
