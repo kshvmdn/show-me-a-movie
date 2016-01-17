@@ -1,7 +1,7 @@
 {
   "name": "show-me-a-movie",
-  "version": "0.0.2",
-  "description": "Stream a movie with the command line, given the IMDb ID.",
+  "version": "0.1.0",
+  "description": "Stream any movie through your command line.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -33,7 +33,9 @@
     "bluebird": "^3.1.1",
     "colors": "^1.1.2",
     "jsonfile": "^2.2.3",
+    "node-movie": "^2.0.0",
     "thepiratebay": "^0.2.6",
-    "torrent-stream": "^1.0.2"
+    "torrent-stream": "^1.0.2",
+    "unique-random": "^1.0.0"
   }
 }
