@@ -1,6 +1,6 @@
 # Show Me a Movie
 
-Stream any movie through your command line with its IMDb token. Available on [npm](npmjs.org/packages/show-me-a-movie).
+Stream any movie through your command line with its IMDb token. Available on [npm](http://npmjs.org/packages/show-me-a-movie).
 
 ### Usage
 
@@ -12,7 +12,7 @@ Stream any movie through your command line with its IMDb token. Available on [np
 
 #### Setup/Running
 
-Install via [npm](npmjs.org/packages/show-me-a-movie).
+Install via [npm](http://npmjs.org/packages/show-me-a-movie).
 
 ``` 
 npm install show-me-a-movie -g
