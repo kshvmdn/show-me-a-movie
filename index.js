@@ -10,11 +10,11 @@ const torrentStream = require('torrent-stream');
 
 var getJSON = function(token) {
 	return new Promise(function(resolve, reject) {
-		if (token == undefined) reject(new Error('token not supplied'))
+		if (token == undefined) reject(new Error('No IMDb token supplied.'))
 		movie(token, function(err, data) {
-			if (data == null) reject(new Error('invalid request'));
-			if (data.Response == 'False') reject(new Error('invalid token'));
-			if (data.Type != 'movie') reject(new Error('invalid type'));
+			if (data == null) reject(new Error('Request failed.'));
+			if (data.Response == 'False') reject(new Error('Invalid IMDb token.'));
+			if (data.Type != 'movie') reject(new Error('Response type is not movie.'));
 			resolve(data);
 		});
 	});
@@ -55,7 +55,7 @@ var parseTorrent = function(torrentData) {
 
 var playMovie = function(args) {
 	let cmd = spawn('peerflix', args).on('error', function(err) {
-		if (err.code == 'ENOENT') throw new Error('Peerflix not installed globably');
+		if (err.code == 'ENOENT') throw new Error('Peerflix not installed globaly. Try `npm install -g peerflix`.');
 		else throw err;
 	});
 	cmd.stdout.pipe(process.stdout);
@@ -64,12 +64,14 @@ var playMovie = function(args) {
 
 let imdbToken = process.argv[2];
 getJSON(imdbToken).then(function(data) {
-	console.log('So you want to see %s? ' + 'Loading stream...', String(data.Title).yellow);
+	console.log('> Requesting torrent data for %s...', String(data.Title).yellow);
 	return getTorrent(data.Title);
 }).then(function(results) {
-	// TODO add handling for multiple files in single magnet
-	var args = [results[0].magnetLink, '--vlc', '--fullscreen'];
-	playMagnet(args);
+	console.log('> ' + 'Torrent data received, loading stream...'.green);
+	return parseTorrent(results[0]);
+}).then(function(args) {
+	console.log('> ' + 'Ready, opening movie!'.green);
+	playMovie(args);
 }).catch(function(e) {
-	console.log(e);
+	console.log(String(e.message).red);
 });
