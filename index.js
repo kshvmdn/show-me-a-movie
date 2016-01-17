@@ -7,10 +7,11 @@ const movie = require('node-movie').getByID;
 const spawn = require('child_process').spawn;
 const tpb = require('thepiratebay');
 const torrentStream = require('torrent-stream');
+const tokens = require('./tokens');
+const randToken = require('unique-random')(0, tokens.length);
 
 var getJSON = function(token) {
 	return new Promise(function(resolve, reject) {
-		if (token == undefined) reject(new Error('No IMDb token supplied.'))
 		movie(token, function(err, data) {
 			if (data == null) reject(new Error('Request failed.'));
 			if (data.Response == 'False') reject(new Error('Invalid IMDb token.'));
@@ -31,7 +32,6 @@ var getTorrent = function(movieTitle) {
 }
 
 var parseTorrent = function(torrentData) {
-	// console.log(torrentData);
 	let engine = torrentStream(torrentData.magnetLink);
 	let args = [torrentData.magnetLink, '--vlc'];
 
@@ -62,7 +62,8 @@ var playMovie = function(args) {
 	cmd.stderr.pipe(process.stdout);
 }
 
-let imdbToken = process.argv[2];
+let imdbToken = process.argv[2] == null ? tokens[randToken()] : process.argv[2];
+
 getJSON(imdbToken).then(function(data) {
 	console.log('> Requesting torrent data for %s...', String(data.Title).yellow);
 	return getTorrent(data.Title);
