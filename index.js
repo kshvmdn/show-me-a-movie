@@ -30,7 +30,30 @@ var getTorrent = function(movieTitle) {
 	});
 }
 
-var playMagnet = function(args) {
+var parseTorrent = function(torrentData) {
+	// console.log(torrentData);
+	let engine = torrentStream(torrentData.magnetLink);
+	let args = [torrentData.magnetLink, '--vlc'];
+
+	return new Promise(function(resolve, reject) {
+		engine.on('ready', function() {
+			var file = { 'fileIndex': 0, 'size': engine.files[0].length };
+			if (engine.files.length > 1){
+				console.log('> ' + 'Multiple files in magnet. Processing data...'.yellow)
+				engine.files.forEach(function(f, i) {
+					if (f.length > file.size) {
+						file.fileIndex = i; 
+						file.size = f.length;
+					}
+				});
+				args.push('--index=' + file.fileIndex)
+			}
+			resolve(args);
+		});
+	});
+}
+
+var playMovie = function(args) {
 	let cmd = spawn('peerflix', args).on('error', function(err) {
 		if (err.code == 'ENOENT') throw new Error('Peerflix not installed globably');
 		else throw err;
