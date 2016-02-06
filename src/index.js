@@ -16,6 +16,16 @@ var getToken = function() {
   });
 }
 
+var getJSON = function(token) {
+  return new Promise(function(resolve, reject) {
+    movie(token, function(err, data) {
+      if (data == null) reject(new Error('Request failed. Try again later.'));
+      if (data.Response == 'False') reject(new Error('Invalid IMDb token.'));
+      if (data.Type != 'movie') reject(new Error('Expected movie, received ' + data.Type + '.'))
+      resolve(data);
+    });
+  });
+}
 
 var getTorrent = function(movieTitle) {
   return new Promise(function(resolve, reject) {
@@ -24,6 +34,7 @@ var getTorrent = function(movieTitle) {
     })
     .then(results => {
       if (results.length == 0) {
+        reject(new Error('No torrents found for \"' + movieTitle + '\".'));
       }
       resolve(results);
     })
@@ -61,6 +72,7 @@ var getMagnet = function(torrentData) {
 
 var playMovie = function(args) {
   let cmd = spawn('peerflix', args).on('error', function(err) {
+    if (err.code == 'ENOENT') throw new Error('Peerflix not installed globaly. Try `npm install -g peerflix`.');
     else throw err;
   });
   cmd.stdout.pipe(process.stdout);
