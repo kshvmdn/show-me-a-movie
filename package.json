@@ -1,6 +1,6 @@
 {
   "name": "show-me-a-movie",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Stream any movie through your command line.",
   "main": "index.js",
   "scripts": {
