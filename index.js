@@ -24,10 +24,17 @@ var getJSON = function(token) {
 var getTorrent = function(movieTitle) {
     return new Promise(function(resolve, reject) {
         tpb.search(movieTitle, {
-            category: '201' 
+            category: '201'
         })
-        .then(function(results) { resolve(results); })
-        .catch(function(err) { reject(err); });
+        .then(function(results) {
+            if (results.length == 0) {
+                reject(new Error('No torrents found for \"' + movieTitle + '\".'));
+            }
+            resolve(results);
+        })
+        .catch(function(err) {
+            reject(new Error(err));
+        });
     });
 }
 
@@ -42,7 +49,7 @@ var parseTorrent = function(torrentData) {
                 console.log('> ' + 'Multiple files in magnet. Processing data...'.yellow)
                 engine.files.forEach(function(f, i) {
                     if (f.length > file.size) {
-                        file.fileIndex = i; 
+                        file.fileIndex = i;
                         file.size = f.length;
                     }
                 });
