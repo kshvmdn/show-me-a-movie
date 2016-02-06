@@ -30,10 +30,10 @@
   },
   "homepage": "https://github.com/kshvmdn/show-me-a-movie#readme",
   "dependencies": {
-    "bluebird": "^3.1.1",
     "colors": "^1.1.2",
     "jsonfile": "^2.2.3",
     "node-movie": "^2.0.0",
+    "pinkie-promise": "^2.0.0",
     "thepiratebay": "^0.2.6",
     "torrent-stream": "^1.0.2",
     "unique-random": "^1.0.0"

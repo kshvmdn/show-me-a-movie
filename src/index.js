@@ -1,6 +1,6 @@
 'use strict';
 
-const Promise = require('bluebird');
+const Promise = require('pinkie-promise');
 const colors = require('colors');
 const movie = require('node-movie').getByID;
 const spawn = require('child_process').spawn;
