@@ -1,0 +1,24 @@
+#! /usr/bin/env node
+'use strict';
+
+const app = require('../src/index');
+
+app.getToken()
+  .then(token => {
+    return app.getData(token)
+  })
+  .then(data => {
+    console.log('> Requesting torrent data for %s...', String(data.Title).green);
+    return app.getTorrent(data.Title);
+  })
+  .then(results => {
+    console.log('> ' + 'Torrent data received, loading stream...'.green);
+    return app.getMagnet(results);
+  })
+  .then(args => {
+    console.log('> ' + 'Ready, opening movie!'.green);
+    app.playMovie(args);
+  })
+  .catch(e => {
+    console.log(String(e.message).red);
+  });

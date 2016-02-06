@@ -21,7 +21,7 @@
     "random"
   ],
   "bin": {
-    "show-me-a-movie": "index.js"
+    "show-me-a-movie": "bin/show-me-a-movie"
   },
   "author": "Kashav Madan <kshvmdn@gmail.com> (kshvmdn.me)",
   "license": "MIT",
