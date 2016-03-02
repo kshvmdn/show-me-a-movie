@@ -23,7 +23,11 @@
   "bin": {
     "show-me-a-movie": "bin/show-me-a-movie"
   },
-  "author": "Kashav Madan <kshvmdn@gmail.com> (kshvmdn.me)",
+  "author": {
+    "name": "Kashav Madan",
+    "email": "kshvmdn@gmail.com",
+    "site": "kshvmdn.me"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/kshvmdn/show-me-a-movie/issues"
